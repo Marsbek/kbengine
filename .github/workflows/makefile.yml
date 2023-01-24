@@ -1,17 +1,11 @@
-name: Makefile CI
+ifndef KBE_ROOT
+export KBE_ROOT := $(subst /kbe/src,,$(CURDIR))
+endif
 
-on:
-  push:
-    branches: [ "master" ]
-  pull_request:
-    branches: [ "master" ]
 
-jobs:
-  build:
+all clean:
+	$(MAKE) -C lib $@
+	$(MAKE) -C server $@
 
-    runs-on: ubuntu-latest
-
-    steps:
-    - uses: actions/checkout@v3
-    
-    - run: make
+cleanall:
+	$(MAKE) clean
